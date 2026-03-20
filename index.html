@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="个人博客与作品集 — 日常思考与技术笔记"
+    />
+    <title>蒋诚林 · 思考与作品</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到正文</a>
+    <header class="site-header">
+      <a class="brand" href="index.html">蒋诚林</a>
+      <button
+        type="button"
+        class="nav-toggle"
+        aria-expanded="false"
+        aria-controls="site-nav"
+      >
+        菜单
+      </button>
+      <nav id="site-nav" class="nav" aria-label="主导航">
+        <ul class="nav-list">
+          <li><a href="index.html" aria-current="page">首页</a></li>
+          <li><a href="blog.html">笔记</a></li>
+          <li><a href="work.html">作品</a></li>
+          <li><a href="about.html">关于</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="layout">
+      <div class="layout__slit" aria-hidden="true"></div>
+      <main id="main" class="layout__main">
+        <section class="hero">
+          <p class="hero__label">Journal &amp; Works</p>
+          <h1 class="hero__title">在混凝土与光之间，记录思考与建造。</h1>
+          <p class="hero__lead">
+            这里是个人站点：技术笔记、法律与 AI
+            工作流随笔，以及少量项目陈列。结构尽量简单，方便你通过链接直接打开阅读。
+          </p>
+        </section>
+
+        <section class="section" aria-labelledby="recent-notes">
+          <div class="section__head">
+            <h2 id="recent-notes" class="section__title">最近笔记</h2>
+            <a class="section__more" href="blog.html">全部笔记</a>
+          </div>
+          <div class="card-grid card-grid--2">
+            <article class="card">
+              <p class="card__meta">占位 · 待发布</p>
+              <h3 class="card__title">
+                <a href="posts/example.html">第一篇笔记标题（示例）</a>
+              </h3>
+              <p class="card__excerpt">
+                将 Markdown 或 HTML 文章放入 <code>posts/</code>，再在
+                <code>blog.html</code> 里挂上链接即可。
+              </p>
+            </article>
+            <article class="card">
+              <p class="card__meta">占位 · 待发布</p>
+              <h3 class="card__title">
+                <a href="blog.html">更多内容整理中</a>
+              </h3>
+              <p class="card__excerpt">
+                站点为纯静态文件，可托管在 GitHub Pages、Vercel、Cloudflare
+                Pages 等任意平台。
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="featured-work">
+          <div class="section__head">
+            <h2 id="featured-work" class="section__title">作品摘录</h2>
+            <a class="section__more" href="work.html">查看作品</a>
+          </div>
+          <div class="work-grid">
+            <a href="work.html" class="work-tile">
+              <div>
+                <p class="work-tile__label">Project</p>
+                <p class="work-tile__name">示例项目 A</p>
+              </div>
+            </a>
+            <a href="work.html" class="work-tile">
+              <div>
+                <p class="work-tile__label">Project</p>
+                <p class="work-tile__name">示例项目 B</p>
+              </div>
+            </a>
+          </div>
+        </section>
+
+        <section class="about-strip" aria-labelledby="about-short">
+          <div>
+            <p class="about-strip__tag">About</p>
+          </div>
+          <p id="about-short" class="about-strip__text">
+            页面视觉参考清水混凝土与窄缝采光：灰阶、直線、少装饰。你可按需在
+            <code>css/style.css</code> 的 <code>:root</code> 中调整色板与字号。
+          </p>
+        </section>
+      </main>
+      <div class="layout__rail" aria-hidden="true"></div>
+    </div>
+
+    <footer class="site-footer">
+      <p>© <span id="y"></span> 蒋诚林 · 静态站点 · 可自由部署</p>
+    </footer>
+    <script>
+      document.getElementById("y").textContent = new Date().getFullYear();
+    </script>
+    <script src="js/main.js" defer></script>
+  </body>
+</html>

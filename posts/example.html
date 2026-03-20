@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="示例文章" />
+    <title>第一篇笔记标题（示例） · 蒋诚林</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到正文</a>
+    <header class="site-header">
+      <a class="brand" href="../index.html">蒋诚林</a>
+      <button
+        type="button"
+        class="nav-toggle"
+        aria-expanded="false"
+        aria-controls="site-nav"
+      >
+        菜单
+      </button>
+      <nav id="site-nav" class="nav" aria-label="主导航">
+        <ul class="nav-list">
+          <li><a href="../index.html">首页</a></li>
+          <li><a href="../blog.html" aria-current="page">笔记</a></li>
+          <li><a href="../work.html">作品</a></li>
+          <li><a href="../about.html">关于</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="layout">
+      <div class="layout__slit" aria-hidden="true"></div>
+      <main id="main" class="layout__main">
+        <article class="article">
+          <p class="article__meta">2026-03-20 · 示例</p>
+          <h1 class="article__title">第一篇笔记标题（示例）</h1>
+          <div class="article__body">
+            <p>
+              正文从这里开始。你可以用段落、小标题 <code>&lt;h2&gt;</code>、行内代码
+              <code>like_this</code> 等保持与全站一致的样式。
+            </p>
+            <h2>第二节</h2>
+            <p>
+              写完后在 <code>blog.html</code> 与首页卡片里更新标题与链接。若更习惯
+              Markdown，可后续接入 Eleventy、Astro 等静态生成器，把
+              <code>.md</code> 编译成相同结构的 HTML。
+            </p>
+            <p>
+              <a href="../blog.html">← 返回笔记列表</a>
+            </p>
+          </div>
+        </article>
+      </main>
+      <div class="layout__rail" aria-hidden="true"></div>
+    </div>
+
+    <footer class="site-footer">
+      <p>© <span id="y"></span> 蒋诚林</p>
+    </footer>
+    <script>
+      document.getElementById("y").textContent = new Date().getFullYear();
+    </script>
+    <script src="../js/main.js" defer></script>
+  </body>
+</html>

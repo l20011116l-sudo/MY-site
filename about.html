@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="关于本站与联系方式" />
+    <title>关于 · 蒋诚林</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到正文</a>
+    <header class="site-header">
+      <a class="brand" href="index.html">蒋诚林</a>
+      <button
+        type="button"
+        class="nav-toggle"
+        aria-expanded="false"
+        aria-controls="site-nav"
+      >
+        菜单
+      </button>
+      <nav id="site-nav" class="nav" aria-label="主导航">
+        <ul class="nav-list">
+          <li><a href="index.html">首页</a></li>
+          <li><a href="blog.html">笔记</a></li>
+          <li><a href="work.html">作品</a></li>
+          <li><a href="about.html" aria-current="page">关于</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="layout">
+      <div class="layout__slit" aria-hidden="true"></div>
+      <main id="main" class="layout__main">
+        <article class="article">
+          <p class="article__meta">About</p>
+          <h1 class="article__title">关于本站</h1>
+          <div class="article__body">
+            <p>
+              本站为静态 HTML，无构建步骤，便于在任何静态托管商上发布。视觉基调：清水混凝土式的灰阶、直墙般的分割与一侧窄「光缝」，对应安藤作品中常见的材质与采光逻辑（仅为网页上的抽象引用，非建筑学表述）。
+            </p>
+            <h2>如何让别人通过网址打开</h2>
+            <p>
+              将 <code>personal-site</code> 文件夹推送到 GitHub 等仓库，在仓库设置里开启
+              GitHub Pages（或改用 Vercel / Netlify / Cloudflare Pages 连接同一仓库），会得到形如
+              <code>用户名.github.io/仓库名</code> 的公开地址。把该链接发给朋友即可。
+            </p>
+            <h2>修改署名与文案</h2>
+            <p>
+              全站品牌名出现在各页顶栏与页脚，可按需替换「蒋诚林」为你的笔名或英文名；首页 <code>hero</code> 区可改写为你的自我介绍。
+            </p>
+          </div>
+        </article>
+      </main>
+      <div class="layout__rail" aria-hidden="true"></div>
+    </div>
+
+    <footer class="site-footer">
+      <p>© <span id="y"></span> 蒋诚林</p>
+    </footer>
+    <script>
+      document.getElementById("y").textContent = new Date().getFullYear();
+    </script>
+    <script src="js/main.js" defer></script>
+  </body>
+</html>

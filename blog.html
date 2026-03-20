@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="技术笔记与随笔列表" />
+    <title>笔记 · 蒋诚林</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到正文</a>
+    <header class="site-header">
+      <a class="brand" href="index.html">蒋诚林</a>
+      <button
+        type="button"
+        class="nav-toggle"
+        aria-expanded="false"
+        aria-controls="site-nav"
+      >
+        菜单
+      </button>
+      <nav id="site-nav" class="nav" aria-label="主导航">
+        <ul class="nav-list">
+          <li><a href="index.html">首页</a></li>
+          <li><a href="blog.html" aria-current="page">笔记</a></li>
+          <li><a href="work.html">作品</a></li>
+          <li><a href="about.html">关于</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="layout">
+      <div class="layout__slit" aria-hidden="true"></div>
+      <main id="main" class="layout__main">
+        <header class="hero" style="padding-bottom: var(--space-md); margin-bottom: var(--space-md)">
+          <p class="hero__label">Notes</p>
+          <h1 class="hero__title" style="font-size: clamp(1.5rem, 3vw, 2rem)">
+            笔记与随笔
+          </h1>
+          <p class="hero__lead">
+            按时间倒序。新文章：复制 <code>posts/example.html</code>，改文件名与正文，在此页增加一条链接。
+          </p>
+        </header>
+
+        <ul class="card-grid" style="list-style: none; padding: 0; margin: 0">
+          <li class="card">
+            <p class="card__meta">2026 · 示例</p>
+            <h2 class="card__title">
+              <a href="posts/example.html">第一篇笔记标题（示例）</a>
+            </h2>
+            <p class="card__excerpt">用于演示文章页版式与排版层级。</p>
+          </li>
+        </ul>
+      </main>
+      <div class="layout__rail" aria-hidden="true"></div>
+    </div>
+
+    <footer class="site-footer">
+      <p>© <span id="y"></span> 蒋诚林</p>
+    </footer>
+    <script>
+      document.getElementById("y").textContent = new Date().getFullYear();
+    </script>
+    <script src="js/main.js" defer></script>
+  </body>
+</html>
