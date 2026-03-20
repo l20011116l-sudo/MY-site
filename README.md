@@ -40,6 +40,17 @@ git push -u origin main
 
 若提示登录：按 GitHub 当前要求使用 **HTTPS + Personal Access Token** 或 **SSH**（仓库页有切换说明）。
 
+**用 `context-infrastructure/.env` 里的 token 推送（推荐）**
+
+1. 在 `../context-infrastructure/.env` 中填写 `GITHUB_TOKEN=你的PAT`，**保存文件**（未保存则 token 为空，推送会失败）。
+2. 在 `personal-site` 目录执行：
+
+```bash
+./push-to-github.sh
+```
+
+脚本会一次性把 `main` 推到 `MY-site` 仓库，**不会**把 token 写进 `git config`。
+
 ### 3. 打开 GitHub Pages
 
 1. 打开该仓库 → **Settings** → 左侧 **Pages**。
