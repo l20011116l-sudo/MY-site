@@ -3,122 +3,679 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      name="description"
-      content="个人博客与作品集 — 日常思考与技术笔记"
-    />
-    <title>蒋诚林 · 思考与作品</title>
+    <meta name="description" content="Chenglin的树屋 — 博客与作品 · Canvas 预览" />
+    <title>Chenglin的树屋 · Canvas</title>
+    <!-- Hero：JPEG 以 data URI 写在 SVG &lt;image&gt; 内（Canvas 可用）；原色 + 中心清晰/边缘虚化叠层 -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      :root {
+        --paper: #f7f7f5;
+        --hairline: rgba(58, 58, 56, 0.3);
+        --hairline-border: rgba(58, 58, 56, 0.2);
+        --forest: #1a3c2b;
+        --forest-hover: #143525;
+        --ink: #1a1a18;
+        --muted: #5c5c58;
+        --coral: #e85d4c;
+        --mint: #3d9b7a;
+        --gold: #c9a227;
+        --shadow-brand: 0 4px 28px rgba(42, 42, 40, 0.18),
+          0 12px 48px rgba(42, 42, 40, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+        --font-mono: "JetBrains Mono", ui-monospace, monospace;
+        --font-display: "Space Grotesk", system-ui, sans-serif;
+        --font-sc: "Noto Sans SC", "PingFang SC", sans-serif;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        color: var(--ink);
+        background: var(--paper);
+        font-family: var(--font-sc);
+        font-size: 1rem;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* --- Mosaic background (SVG tile) --- */
+      .mosaic-bg {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background-color: var(--paper);
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Crect fill='%23F7F7F5' width='200' height='200'/%3E%3Cg fill='none' stroke='%233A3A38' stroke-opacity='0.3' stroke-width='0.5'%3E%3Cpath d='M0 0h90v90H0z M90 0h110v45H90z M90 45h55v155H90z M145 45h55v80h-55z M0 90h90v110H0z M145 125h55v75h-55z'/%3E%3Cpath d='M0 45h90M90 90h110M145 90v35M0 200V0M200 0v200M45 45v45M200 125H0'/%3E%3C/g%3E%3C/svg%3E");
+        background-size: 200px 200px;
+      }
+
+      .page {
+        position: relative;
+        z-index: 1;
+      }
+
+      /* --- Fixed technical nav --- */
+      .tech-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        min-height: 64px;
+        padding: 0 clamp(1rem, 4vw, 2rem);
+        background: rgba(247, 247, 245, 0.92);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--hairline-border);
+      }
+
+      .logo-box {
+        flex-shrink: 0;
+        width: 32px;
+        height: 32px;
+        background: var(--forest);
+        display: grid;
+        place-items: center;
+        border-radius: 2px;
+      }
+
+      .logo-box svg {
+        width: 18px;
+        height: 18px;
+        color: #fff;
+      }
+
+      .nav-center {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: clamp(0.75rem, 2vw, 1.75rem);
+      }
+
+      .nav-center a {
+        font-family: var(--font-mono) !important;
+        font-size: 10px !important;
+        font-weight: 500;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--ink) !important;
+        text-decoration: none !important;
+        border: none !important;
+        opacity: 0.85;
+      }
+
+      .nav-center a:hover {
+        color: var(--forest) !important;
+        opacity: 1;
+      }
+
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        flex-shrink: 0;
+      }
+
+      .btn-ghost {
+        font-family: var(--font-mono) !important;
+        font-size: 10px !important;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 0.5rem 0.9rem;
+        border: 1px solid var(--hairline-border) !important;
+        background: transparent;
+        color: var(--ink) !important;
+        cursor: pointer;
+        border-radius: 2px;
+      }
+
+      .btn-ghost:hover {
+        border-color: var(--forest) !important;
+        color: var(--forest) !important;
+      }
+
+      .btn-forest {
+        font-family: var(--font-mono) !important;
+        font-size: 10px !important;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 0.5rem 1rem;
+        border: none;
+        background: var(--forest) !important;
+        color: #fff !important;
+        cursor: pointer;
+        border-radius: 2px;
+      }
+
+      .btn-forest:hover {
+        background: var(--forest-hover) !important;
+      }
+
+      /* --- Section dividers --- */
+      .section-rule {
+        width: 100%;
+        height: 1px;
+        background: var(--hairline-border);
+        border: none;
+        margin: 0;
+      }
+
+      main {
+        padding-top: 64px;
+      }
+
+      /* --- Hero --- */
+      .hero-wrap {
+        padding: clamp(3rem, 8vw, 6rem) clamp(1rem, 4vw, 3rem);
+        border-bottom: 1px solid var(--hairline-border);
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        align-items: center;
+      }
+
+      @media (min-width: 900px) {
+        .hero-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      .hero-brand {
+        font-family: var(--font-display) !important;
+        font-size: clamp(3rem, 8vw, 6rem) !important;
+        font-weight: 700 !important;
+        line-height: 1.05 !important;
+        letter-spacing: -0.04em !important;
+        color: var(--forest) !important;
+        margin: 0 0 1.25rem !important;
+        /* 灰色阴影：品牌树屋 */
+        text-shadow: var(--shadow-brand);
+      }
+
+      .hero-sub {
+        display: flex;
+        gap: 1rem;
+        align-items: flex-start;
+        max-width: 36ch;
+      }
+
+      .hero-sub__line {
+        width: 1px;
+        min-height: 3.5rem;
+        background: var(--hairline-border);
+        flex-shrink: 0;
+        margin-top: 0.2rem;
+      }
+
+      .hero-sub p {
+        margin: 0;
+        font-family: var(--font-mono) !important;
+        font-size: 14px !important;
+        line-height: 1.55 !important;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted) !important;
+      }
+
+      .hero-visual {
+        aspect-ratio: 1;
+        max-width: 420px;
+        margin: 0 auto;
+        width: 100%;
+        border: 1px solid var(--hairline-border);
+        background: var(--paper);
+        position: relative;
+        overflow: hidden;
+        border-radius: 4px;
+        box-shadow: 0 20px 60px rgba(42, 42, 40, 0.12),
+          0 4px 16px rgba(26, 60, 43, 0.08);
+      }
+
+      .hero-visual__media {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+      }
+
+      .hero-visual__svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+
+      /* 外层渐变阴影：与 SVG 中心清晰、边缘发虚呼应 */
+      .hero-visual__wash {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+        background: radial-gradient(
+          ellipse 78% 82% at 50% 44%,
+          rgba(247, 247, 245, 0) 0%,
+          rgba(247, 247, 245, 0.08) 52%,
+          rgba(26, 60, 43, 0.07) 78%,
+          rgba(247, 247, 245, 0.55) 100%
+        );
+      }
+
+      .hero-visual__orbit {
+        position: absolute;
+        z-index: 2;
+        width: 72%;
+        height: 72%;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        border: 1px dashed rgba(58, 58, 56, 0.35);
+        border-radius: 50%;
+        pointer-events: none;
+      }
+
+      .hero-visual__dot {
+        position: absolute;
+        z-index: 3;
+        width: 8px;
+        height: 8px;
+        background: var(--forest);
+        border-radius: 50%;
+        top: 8%;
+        left: 50%;
+        transform: translateX(-50%);
+        pointer-events: none;
+      }
+
+      /* --- Bento --- */
+      .bento-section {
+        padding: clamp(3rem, 6vw, 5rem) clamp(1rem, 4vw, 3rem);
+        border-bottom: 1px solid var(--hairline-border);
+      }
+
+      .bento-head {
+        font-family: var(--font-mono) !important;
+        font-size: 10px !important;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--muted) !important;
+        margin: 0 0 1.5rem;
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .bento-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1px;
+        max-width: 1200px;
+        margin: 0 auto;
+        background: var(--hairline-border);
+        border: 1px solid var(--hairline-border);
+      }
+
+      @media (min-width: 700px) {
+        .bento-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      .bento-cell {
+        background: var(--paper);
+        padding: 32px;
+        min-height: 200px;
+      }
+
+      .bento-cell h3 {
+        font-family: var(--font-mono) !important;
+        font-size: 11px !important;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        margin: 0 0 1rem;
+        padding-left: 0.75rem;
+        border-left: 3px solid;
+      }
+
+      .bento-cell--coral h3 {
+        border-left-color: var(--coral);
+      }
+      .bento-cell--mint h3 {
+        border-left-color: var(--mint);
+      }
+      .bento-cell--gold h3 {
+        border-left-color: var(--gold);
+      }
+      .bento-cell--forest h3 {
+        border-left-color: var(--forest);
+      }
+
+      .mockup {
+        font-family: var(--font-mono) !important;
+        font-size: 11px !important;
+        line-height: 1.65 !important;
+        color: var(--muted) !important;
+        background: rgba(255, 255, 255, 0.7);
+        border: 1px solid var(--hairline-border);
+        padding: 0.75rem 1rem;
+        border-radius: 2px;
+        margin-top: 0.5rem;
+      }
+
+      .mockup .chip {
+        display: inline-block;
+        padding: 0.15rem 0.45rem;
+        margin: 0.15rem 0.15rem 0 0;
+        font-size: 10px !important;
+        border-radius: 2px;
+        background: #eaeae6;
+        color: var(--ink) !important;
+      }
+
+      .bento-cell p.lead {
+        margin: 0;
+        font-size: 0.95rem;
+        color: var(--ink);
+      }
+
+      /* --- Form CTA --- */
+      .form-section {
+        padding: clamp(3rem, 8vw, 6rem) 1rem;
+        border-bottom: 1px solid var(--hairline-border);
+      }
+
+      .form-box {
+        position: relative;
+        max-width: 640px;
+        margin: 0 auto;
+        padding: 2rem clamp(1.25rem, 3vw, 2.5rem);
+        background: var(--paper);
+        border: 1px solid var(--hairline-border);
+      }
+
+      .form-box__corner {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-color: var(--forest);
+        border-style: solid;
+      }
+      .form-box__corner--tl {
+        top: -1px;
+        left: -1px;
+        border-width: 1px 0 0 1px;
+      }
+      .form-box__corner--tr {
+        top: -1px;
+        right: -1px;
+        border-width: 1px 1px 0 0;
+      }
+      .form-box__corner--bl {
+        bottom: -1px;
+        left: -1px;
+        border-width: 0 0 1px 1px;
+      }
+      .form-box__corner--br {
+        bottom: -1px;
+        right: -1px;
+        border-width: 0 1px 1px 0;
+      }
+
+      .form-box h2 {
+        font-family: var(--font-display) !important;
+        font-size: 1.5rem !important;
+        font-weight: 600 !important;
+        color: var(--forest) !important;
+        margin: 0 0 1.5rem;
+      }
+
+      .field {
+        margin-bottom: 1.25rem;
+      }
+
+      .field label {
+        display: block;
+        font-family: var(--font-mono) !important;
+        font-size: 10px !important;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted) !important;
+        margin-bottom: 0.4rem;
+      }
+
+      .field input,
+      .field textarea {
+        width: 100%;
+        font-family: var(--font-sc);
+        font-size: 0.95rem;
+        padding: 0.65rem 0.75rem;
+        border: 1px solid var(--hairline-border);
+        background: #fff !important;
+        border-radius: 2px;
+      }
+
+      .field textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+
+      .site-footer {
+        text-align: center;
+        padding: 2rem 1rem;
+        font-family: var(--font-mono) !important;
+        font-size: 10px !important;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted) !important;
+      }
+
+      .site-footer strong {
+        font-family: var(--font-display);
+        font-size: 1rem;
+        letter-spacing: -0.02em;
+        text-transform: none;
+        color: var(--forest);
+        text-shadow: var(--shadow-brand);
+        font-weight: 600;
+      }
+    </style>
   </head>
   <body>
-    <a class="skip-link" href="#main">跳到正文</a>
-    <header class="site-header">
-      <a class="brand" href="index.html">蒋诚林</a>
-      <button
-        type="button"
-        class="nav-toggle"
-        aria-expanded="false"
-        aria-controls="site-nav"
-      >
-        菜单
-      </button>
-      <nav id="site-nav" class="nav" aria-label="主导航">
-        <ul class="nav-list">
-          <li><a href="index.html" aria-current="page">首页</a></li>
-          <li><a href="blog.html">笔记</a></li>
-          <li><a href="work.html">作品</a></li>
-          <li><a href="about.html">关于</a></li>
-        </ul>
-      </nav>
-    </header>
+    <div class="mosaic-bg" aria-hidden="true"></div>
 
-    <div class="layout">
-      <div class="layout__slit" aria-hidden="true"></div>
-      <main id="main" class="layout__main">
-        <section class="hero">
-          <p class="hero__label">Journal &amp; Works</p>
-          <h1 class="hero__title">在混凝土与光之间，记录思考与建造。</h1>
-          <p class="hero__lead">
-            这里是个人站点：技术笔记、法律与 AI
-            工作流随笔，以及少量项目陈列。结构尽量简单，方便你通过链接直接打开阅读。
-          </p>
-        </section>
+    <div class="page">
+      <header class="tech-header">
+        <a href="#" class="logo-box" aria-label="Chenglin的树屋">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M4 20h16M6 20V10l6-6 6 6v10" />
+            <path d="M10 20v-6h4v6" />
+          </svg>
+        </a>
+        <nav class="nav-center" aria-label="主导航">
+          <a href="#hero">01. Home</a>
+          <a href="#features">02. Notes</a>
+          <a href="#features">03. Works</a>
+          <a href="#contact">04. Contact</a>
+        </nav>
+        <div class="nav-actions">
+          <button type="button" class="btn-ghost">RSS</button>
+          <button type="button" class="btn-forest">Subscribe</button>
+        </div>
+      </header>
 
-        <section class="section" aria-labelledby="recent-notes">
-          <div class="section__head">
-            <h2 id="recent-notes" class="section__title">最近笔记</h2>
-            <a class="section__more" href="blog.html">全部笔记</a>
-          </div>
-          <div class="card-grid card-grid--2">
-            <article class="card">
-              <p class="card__meta">占位 · 待发布</p>
-              <h3 class="card__title">
-                <a href="posts/example.html">第一篇笔记标题（示例）</a>
-              </h3>
-              <p class="card__excerpt">
-                将 Markdown 或 HTML 文章放入 <code>posts/</code>，再在
-                <code>blog.html</code> 里挂上链接即可。
-              </p>
-            </article>
-            <article class="card">
-              <p class="card__meta">占位 · 待发布</p>
-              <h3 class="card__title">
-                <a href="blog.html">更多内容整理中</a>
-              </h3>
-              <p class="card__excerpt">
-                站点为纯静态文件，可托管在 GitHub Pages、Vercel、Cloudflare
-                Pages 等任意平台。
-              </p>
-            </article>
-          </div>
-        </section>
-
-        <section class="section" aria-labelledby="featured-work">
-          <div class="section__head">
-            <h2 id="featured-work" class="section__title">作品摘录</h2>
-            <a class="section__more" href="work.html">查看作品</a>
-          </div>
-          <div class="work-grid">
-            <a href="work.html" class="work-tile">
-              <div>
-                <p class="work-tile__label">Project</p>
-                <p class="work-tile__name">示例项目 A</p>
+      <main>
+        <section id="hero" class="hero-wrap">
+          <div class="hero-grid">
+            <div>
+              <h1 class="hero-brand">Chenglin的树屋</h1>
+              <div class="hero-sub">
+                <span class="hero-sub__line" aria-hidden="true"></span>
+                <p>
+                  Journal &amp; works — static site, concrete rhythm, green
+                  accent. Built for reading, not for noise.
+                </p>
               </div>
-            </a>
-            <a href="work.html" class="work-tile">
-              <div>
-                <p class="work-tile__label">Project</p>
-                <p class="work-tile__name">示例项目 B</p>
+            </div>
+            <figure class="hero-visual" aria-label="Chenglin 的树屋 — 肖像">
+              <div class="hero-visual__media" aria-hidden="true">
+                <svg
+                  class="hero-visual__svg"
+                  viewBox="0 0 1 1"
+                  preserveAspectRatio="xMidYMid slice"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                >
+                  <defs>
+                    <filter
+                      id="hero-edge-blur"
+                      x="-35%"
+                      y="-35%"
+                      width="170%"
+                      height="170%"
+                      color-interpolation-filters="sRGB"
+                    >
+                      <feGaussianBlur in="SourceGraphic" stdDeviation="0.032" result="b" />
+                    </filter>
+                    <radialGradient id="hero-mask-grad" cx="50%" cy="44%" r="58%">
+                      <stop offset="0%" stop-color="white" />
+                      <stop offset="36%" stop-color="white" />
+                      <stop offset="72%" stop-color="#bbbbbb" />
+                      <stop offset="100%" stop-color="black" />
+                    </radialGradient>
+                    <mask id="hero-fade-mask" maskUnits="objectBoundingBox">
+                      <rect width="1" height="1" fill="url(#hero-mask-grad)" />
+                    </mask>
+                    <image
+                      id="heroPhotoSrc"
+                      href="assets/hero_wechat_embed.jpg"
+                      width="1"
+                      height="1"
+                      preserveAspectRatio="xMidYMid slice"
+                      xlink:href="assets/hero_wechat_embed.jpg"
+                    />
+                  </defs>
+                  <g>
+                    <use
+                      xlink:href="#heroPhotoSrc"
+                      transform="translate(0.5 0.44) scale(1.14) translate(-0.5 -0.44)"
+                      filter="url(#hero-edge-blur)"
+                    />
+                    <use xlink:href="#heroPhotoSrc" mask="url(#hero-fade-mask)" />
+                  </g>
+                </svg>
               </div>
-            </a>
+              <div class="hero-visual__wash" aria-hidden="true"></div>
+              <div class="hero-visual__orbit" aria-hidden="true"></div>
+              <div class="hero-visual__dot" aria-hidden="true"></div>
+            </figure>
           </div>
         </section>
 
-        <section class="about-strip" aria-labelledby="about-short">
-          <div>
-            <p class="about-strip__tag">About</p>
+        <hr class="section-rule" />
+
+        <section id="features" class="bento-section">
+          <p class="bento-head">Layout — Bento feature grid</p>
+          <div class="bento-grid">
+            <article class="bento-cell bento-cell--coral">
+              <h3>Recent notes</h3>
+              <p class="lead">技术笔记与随笔：占位条目，可链到 posts。</p>
+              <div class="mockup">
+                <span class="chip">draft</span>
+                <span class="chip">markdown</span><br />
+                ERR: connection reset — retrying fetch('/api/...')<br />
+                <span style="color: var(--coral)">→ see blog.html</span>
+              </div>
+            </article>
+            <article class="bento-cell bento-cell--mint">
+              <h3>Portfolio</h3>
+              <p class="lead">项目与作品摘录，大图块与外链。</p>
+              <div class="mockup">
+                <span class="chip">build</span>
+                <span class="chip">oklch</span><br />
+                build: success in 12.4s<br />
+                <span style="color: var(--mint)">artifact → dist/</span>
+              </div>
+            </article>
+            <article class="bento-cell bento-cell--gold">
+              <h3>Stack</h3>
+              <p class="lead">纯静态 HTML/CSS，任意静态托管。</p>
+              <div class="mockup">
+                pages: <span class="chip">github</span>
+                <span class="chip">vercel</span>
+                <span class="chip">cf</span><br />
+                $ deploy — dry-run<br />
+                <span style="color: var(--gold)">ready</span>
+              </div>
+            </article>
+            <article class="bento-cell bento-cell--forest">
+              <h3>About</h3>
+              <p class="lead">关于本站与联系方式，见 about 页。</p>
+              <div class="mockup">
+                <span class="chip">treehouse</span><br />
+                // Chenglin的树屋<br />
+                <span style="color: var(--forest)">© year</span>
+              </div>
+            </article>
           </div>
-          <p id="about-short" class="about-strip__text">
-            页面视觉参考清水混凝土与窄缝采光：灰阶、直線、少装饰。你可按需在
-            <code>css/style.css</code> 的 <code>:root</code> 中调整色板与字号。
-          </p>
+        </section>
+
+        <hr class="section-rule" />
+
+        <section id="contact" class="form-section">
+          <div class="form-box">
+            <span class="form-box__corner form-box__corner--tl" aria-hidden="true"></span>
+            <span class="form-box__corner form-box__corner--tr" aria-hidden="true"></span>
+            <span class="form-box__corner form-box__corner--bl" aria-hidden="true"></span>
+            <span class="form-box__corner form-box__corner--br" aria-hidden="true"></span>
+            <h2>Newsletter / 联系</h2>
+            <form action="#" method="get" onsubmit="return false;">
+              <div class="field">
+                <label for="email">Email</label>
+                <input id="email" type="email" name="email" placeholder="you@example.com" autocomplete="email" />
+              </div>
+              <div class="field">
+                <label for="msg">Message</label>
+                <textarea id="msg" name="message" placeholder="Say hello…"></textarea>
+              </div>
+              <button type="submit" class="btn-forest" style="width: 100%; padding: 0.75rem">
+                Send
+              </button>
+            </form>
+          </div>
         </section>
       </main>
-      <div class="layout__rail" aria-hidden="true"></div>
+
+      <footer class="site-footer">
+        <p>
+          © <span id="y"></span>
+          <strong>Chenglin的树屋</strong> · static · design iteration
+        </p>
+      </footer>
     </div>
 
-    <footer class="site-footer">
-      <p>© <span id="y"></span> 蒋诚林 · 静态站点 · 可自由部署</p>
-    </footer>
     <script>
       document.getElementById("y").textContent = new Date().getFullYear();
     </script>
-    <script src="js/main.js" defer></script>
   </body>
 </html>

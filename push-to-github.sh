@@ -17,8 +17,8 @@ if [[ -z "${TOKEN}" ]]; then
   exit 1
 fi
 
-# 与当前 origin 一致：用户 l20011116l-sudo，仓库 MY-site
-REPO_HTTPS="https://github.com/l20011116l-sudo/MY-site.git"
+# 仓库名：My-site（GitHub 上需存在同名仓库，或先在网页端创建空仓库）
+REPO_HTTPS="https://github.com/l20011116l-sudo/My-site.git"
 USER="l20011116l-sudo"
 PUSH_URL="https://${USER}:${TOKEN}@${REPO_HTTPS#https://}"
 
