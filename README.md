@@ -87,7 +87,7 @@ git add -A && git commit -m "更新内容" && git push
 ## 自定义内容
 
 - **署名 / 标题**：各页搜索替换 `蒋诚林`，并改 `<title>` 与 `meta description`。
-- **新文章**：复制 `posts/example.html`，改文件名与正文；在 `blog.html` 与 `index.html` 增加列表项或卡片链接。
+- **新文章**：复制 `posts/example.html`，改文件名与正文；在 `blog.html` 与 `index.html` 增加列表项或卡片链接。更新 `feed.xml` 中的 `<entry>`，便于 RSS 阅读器订阅。
 - **配色与字体**：编辑 `css/style.css` 顶部 `:root` 变量。
 
 ## 目录结构

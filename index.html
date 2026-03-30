@@ -3,8 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Chenglin的树屋 — 博客与作品 · Canvas 预览" />
-    <title>Chenglin的树屋 · Canvas</title>
+    <meta name="description" content="蒋诚林（Chenglin）的个人站点 — 技术笔记、法律学习与静态站" />
+    <title>Chenglin的树屋 · 蒋诚林</title>
+    <link rel="alternate" type="application/atom+xml" title="蒋诚林 · 笔记" href="feed.xml" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='3' fill='%231a3c2b'/%3E%3Cpath fill='none' stroke='%23f7f7f5' stroke-width='1.5' d='M6 26h20M8 26V14l8-8 8 8v12'/%3E%3Cpath fill='none' stroke='%23f7f7f5' stroke-width='1.5' d='M14 26v-6h4v6'/%3E%3C/svg%3E" />
     <!-- Hero：JPEG 以 data URI 写在 SVG &lt;image&gt; 内（Canvas 可用）；原色 + 中心清晰/边缘虚化叠层 -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -167,6 +169,15 @@
         align-items: center;
         gap: 0.5rem;
         flex-shrink: 0;
+      }
+
+      .nav-actions a.btn-ghost,
+      .nav-actions a.btn-forest {
+        text-decoration: none !important;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-bottom: none !important;
       }
 
       .btn-ghost {
@@ -586,21 +597,21 @@
 
     <div class="page">
       <header class="tech-header">
-        <a href="#" class="logo-box" aria-label="Chenglin的树屋">
+        <a href="index.html#hero" class="logo-box" aria-label="Chenglin的树屋 — 首页">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
             <path d="M4 20h16M6 20V10l6-6 6 6v10" />
             <path d="M10 20v-6h4v6" />
           </svg>
         </a>
         <nav class="nav-center" aria-label="主导航">
-          <a href="#hero">01. Home</a>
-          <a href="#features">02. Notes</a>
-          <a href="#features">03. Works</a>
-          <a href="#contact">04. Contact</a>
+          <a href="index.html#hero">01. Home</a>
+          <a href="blog.html">02. Notes</a>
+          <a href="work.html">03. Works</a>
+          <a href="index.html#contact">04. Contact</a>
         </nav>
         <div class="nav-actions">
-          <button type="button" class="btn-ghost">RSS</button>
-          <button type="button" class="btn-forest">Subscribe</button>
+          <a class="btn-ghost" href="feed.xml" title="Atom 订阅">RSS</a>
+          <a class="btn-forest" href="index.html#contact">联系</a>
         </div>
       </header>
 
@@ -609,11 +620,18 @@
           <div class="hero-grid">
             <div>
               <h1 class="hero-brand">Chenglin的树屋</h1>
+              <p style="margin: 0.35rem 0 0; font-size: 0.95rem; color: var(--muted); letter-spacing: 0.02em">
+                蒋诚林 · 技术笔记与法律学习
+              </p>
               <div class="hero-sub">
                 <span class="hero-sub__line" aria-hidden="true"></span>
                 <p>
-                  Journal &amp; works — static site, concrete rhythm, green
-                  accent. Built for reading, not for noise.
+                  纯静态站点：清水混凝土式的灰阶与一点绿。写给人读，不制造噪音。
+                  <a href="blog.html" style="color: var(--forest); border-bottom: 1px solid rgba(26, 60, 43, 0.35)">笔记</a>
+                  ·
+                  <a href="work.html" style="color: var(--forest); border-bottom: 1px solid rgba(26, 60, 43, 0.35)">作品</a>
+                  ·
+                  <a href="about.html" style="color: var(--forest); border-bottom: 1px solid rgba(26, 60, 43, 0.35)">关于</a>
                 </p>
               </div>
             </div>
@@ -675,7 +693,7 @@
         <hr class="section-rule" />
 
         <section id="features" class="bento-section">
-          <p class="bento-head">Layout — Bento feature grid</p>
+          <p class="bento-head">最近在做什么</p>
           <div class="bento-grid">
             <article class="bento-cell bento-cell--coral">
               <h3>Recent notes</h3>
@@ -698,33 +716,39 @@
               </div>
             </article>
             <article class="bento-cell bento-cell--mint">
-              <h3>Portfolio</h3>
-              <p class="lead">项目与作品摘录，大图块与外链。</p>
+              <h3>作品</h3>
+              <p class="lead">
+                本仓库即个人站源码；更多条目见
+                <a href="work.html" style="color: inherit; border-bottom: 1px solid rgba(61, 155, 122, 0.45)">作品页</a>。
+              </p>
               <div class="mockup">
-                <span class="chip">build</span>
-                <span class="chip">oklch</span><br />
-                build: success in 12.4s<br />
-                <span style="color: var(--mint)">artifact → dist/</span>
+                <span class="chip">MY-site</span>
+                <span class="chip">GitHub Pages</span><br />
+                静态 HTML / CSS / JS，无构建步骤<br />
+                <a href="https://github.com/l20011116l-sudo/MY-site" style="color: var(--mint); border-bottom: 1px solid rgba(61, 155, 122, 0.5)">→ github.com/…/MY-site</a>
               </div>
             </article>
             <article class="bento-cell bento-cell--gold">
-              <h3>Stack</h3>
-              <p class="lead">纯静态 HTML/CSS，任意静态托管。</p>
+              <h3>技术栈</h3>
+              <p class="lead">手写页面与样式，托管在 GitHub Pages；可迁到 Vercel / Cloudflare 等任意静态托管。</p>
               <div class="mockup">
-                pages: <span class="chip">github</span>
-                <span class="chip">vercel</span>
-                <span class="chip">cf</span><br />
-                $ deploy — dry-run<br />
-                <span style="color: var(--gold)">ready</span>
+                <span class="chip">html</span>
+                <span class="chip">css</span>
+                <span class="chip">pages</span><br />
+                文章为 HTML + 同源 Markdown 存档<br />
+                <span style="color: var(--gold)">部署：main 分支 / 根目录</span>
               </div>
             </article>
             <article class="bento-cell bento-cell--forest">
-              <h3>About</h3>
-              <p class="lead">关于本站与联系方式，见 about 页。</p>
+              <h3>关于</h3>
+              <p class="lead">
+                个人介绍与建站说明见
+                <a href="about.html" style="color: inherit; border-bottom: 1px solid rgba(26, 60, 43, 0.4)">关于页</a>。
+              </p>
               <div class="mockup">
-                <span class="chip">treehouse</span><br />
-                // Chenglin的树屋<br />
-                <span style="color: var(--forest)">© year</span>
+                <span class="chip">蒋诚林</span><br />
+                Chenglin的树屋 · 笔记与作品<br />
+                <a href="about.html" style="color: var(--forest); border-bottom: 1px solid rgba(26, 60, 43, 0.45)">→ about.html</a>
               </div>
             </article>
           </div>
@@ -738,20 +762,23 @@
             <span class="form-box__corner form-box__corner--tr" aria-hidden="true"></span>
             <span class="form-box__corner form-box__corner--bl" aria-hidden="true"></span>
             <span class="form-box__corner form-box__corner--br" aria-hidden="true"></span>
-            <h2>Newsletter / 联系</h2>
-            <form action="#" method="get" onsubmit="return false;">
-              <div class="field">
-                <label for="email">Email</label>
-                <input id="email" type="email" name="email" placeholder="you@example.com" autocomplete="email" />
-              </div>
-              <div class="field">
-                <label for="msg">Message</label>
-                <textarea id="msg" name="message" placeholder="Say hello…"></textarea>
-              </div>
-              <button type="submit" class="btn-forest" style="width: 100%; padding: 0.75rem">
-                Send
-              </button>
-            </form>
+            <h2>联系与订阅</h2>
+            <p style="margin: 0 0 1rem; font-size: 0.95rem; color: var(--muted); line-height: 1.55">
+              暂未接入站内表单。欢迎通过 GitHub 交流；新文章可在笔记页阅读，或使用 RSS 订阅更新。
+            </p>
+            <div class="field" style="margin-bottom: 0.75rem">
+              <label>链接</label>
+              <p style="margin: 0.35rem 0 0; font-size: 0.95rem">
+                <a href="https://github.com/l20011116l-sudo" style="color: var(--forest)">GitHub</a>
+                ·
+                <a href="feed.xml" style="color: var(--forest)">RSS（Atom）</a>
+                ·
+                <a href="blog.html" style="color: var(--forest)">笔记列表</a>
+                ·
+                <a href="about.html" style="color: var(--forest)">关于</a>
+              </p>
+            </div>
+            <a class="btn-forest" href="https://github.com/l20011116l-sudo" style="display: block; width: 100%; padding: 0.75rem; text-align: center; box-sizing: border-box; text-decoration: none; border: none">在 GitHub 上找到我</a>
           </div>
         </section>
       </main>
@@ -759,7 +786,7 @@
       <footer class="site-footer">
         <p>
           © <span id="y"></span>
-          <strong>Chenglin的树屋</strong> · static · design iteration
+          <strong>蒋诚林</strong> · Chenglin的树屋 · 静态站
         </p>
       </footer>
     </div>

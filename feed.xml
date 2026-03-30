@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>蒋诚林 · 笔记</title>
+  <link href="https://l20011116l-sudo.github.io/MY-site/feed.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://l20011116l-sudo.github.io/MY-site/blog.html" rel="alternate" type="text/html"/>
+  <updated>2026-03-30T00:00:00Z</updated>
+  <id>https://l20011116l-sudo.github.io/MY-site/blog.html</id>
+  <author><name>蒋诚林</name></author>
+  <entry>
+    <title>用 Cursor 做法律研究：上下文、幻觉，以及长期迭代属于自己的「环境工程」</title>
+    <link href="https://l20011116l-sudo.github.io/MY-site/posts/cursor-legal-research-harness-20260330.html" rel="alternate" type="text/html"/>
+    <id>https://l20011116l-sudo.github.io/MY-site/posts/cursor-legal-research-harness-20260330.html</id>
+    <published>2026-03-30T00:00:00Z</published>
+    <updated>2026-03-30T00:00:00Z</updated>
+    <summary>仓库 + 对话下的材料外置、防幻觉与 harness；法律学习实例与反思。</summary>
+  </entry>
+</feed>

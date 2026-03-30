@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="技术笔记与随笔列表" />
     <title>笔记 · 蒋诚林</title>
+    <link rel="alternate" type="application/atom+xml" title="蒋诚林 · 笔记" href="feed.xml" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='3' fill='%231a3c2b'/%3E%3Cpath fill='none' stroke='%23f7f7f5' stroke-width='1.5' d='M6 26h20M8 26V14l8-8 8 8v12'/%3E%3Cpath fill='none' stroke='%23f7f7f5' stroke-width='1.5' d='M14 26v-6h4v6'/%3E%3C/svg%3E" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -43,7 +45,11 @@
           <h1 class="hero__title" style="font-size: clamp(1.5rem, 3vw, 2rem)">
             笔记与随笔
           </h1>
-          <p class="hero__lead">按时间倒序。新文章可复制 <code>posts/example.html</code> 改版式，在此页增加一条链接。</p>
+          <p class="hero__lead">
+            按时间倒序。订阅更新：
+            <a href="feed.xml">RSS（Atom）</a>
+            。新文章在此增加卡片；版式可参考 <code>posts/example.html</code> 或仓库内 Markdown 再生成 HTML。
+          </p>
         </header>
 
         <ul class="card-grid" style="list-style: none; padding: 0; margin: 0">
