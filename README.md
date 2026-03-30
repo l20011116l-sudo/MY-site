@@ -75,6 +75,12 @@ git add -A && git commit -m "更新内容" && git push
 
 推送后等 1～2 分钟，刷新线上页面即可。
 
+### 桌面端仍显示旧版？
+
+多为**浏览器缓存**：手机常是新会话，电脑易长期缓存同一 URL。可 **强制刷新**（Windows/Linux：`Ctrl+Shift+R`；Mac：`Cmd+Shift+R`）或用**无痕窗口**打开。
+
+本站已在各页加入 `Cache-Control` 提示 meta，并对 `css/style.css`、`js/main.js` 使用 **`?v=3` 版本号**以便更新后拉取新资源。若日后大改样式仍有人看到旧 CSS，把全站 HTML 里的 `?v=3` 一并改成 `?v=4` 再推送即可。
+
 ---
 
 ### 其他托管（可选）
@@ -88,7 +94,7 @@ git add -A && git commit -m "更新内容" && git push
 
 - **署名 / 标题**：各页搜索替换 `蒋诚林`，并改 `<title>` 与 `meta description`。
 - **新文章**：复制 `posts/example.html`，改文件名与正文；在 `blog.html` 与 `index.html` 增加列表项或卡片链接。更新 `feed.xml` 中的 `<entry>`，便于 RSS 阅读器订阅。
-- **配色与字体**：编辑 `css/style.css` 顶部 `:root` 变量。
+- **配色与字体**：编辑 `css/style.css` 顶部 `:root` 变量；部署后若样式不更新，见上文「桌面端仍显示旧版」，或递增 HTML 中的 `?v=`。
 
 ## 目录结构
 
