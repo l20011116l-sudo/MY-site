@@ -29,6 +29,10 @@
         --font-mono: "JetBrains Mono", ui-monospace, monospace;
         --font-display: "Space Grotesk", system-ui, sans-serif;
         --font-sc: "Noto Sans SC", "PingFang SC", sans-serif;
+        /* 机械感：短促、略「硬」的曲线，像行程开关 */
+        --mech-dur: 0.09s;
+        --mech-ease: cubic-bezier(0.45, 0, 0.55, 1);
+        --mech-depth: 3px;
       }
 
       *,
@@ -39,6 +43,13 @@
 
       html {
         scroll-behavior: smooth;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        :root {
+          --mech-dur: 0.01s;
+          --mech-depth: 1px;
+        }
       }
 
       body {
@@ -94,6 +105,15 @@
         display: grid;
         place-items: center;
         border-radius: 2px;
+        box-shadow: 0 var(--mech-depth) 0 rgba(10, 28, 20, 0.65);
+        transition: transform var(--mech-dur) var(--mech-ease),
+          box-shadow var(--mech-dur) var(--mech-ease);
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .logo-box:active {
+        transform: translateY(var(--mech-depth)) scale(0.94);
+        box-shadow: 0 0 0 rgba(10, 28, 20, 0.65);
       }
 
       .logo-box svg {
@@ -111,6 +131,7 @@
       }
 
       .nav-center a {
+        display: inline-block;
         font-family: var(--font-mono) !important;
         font-size: 10px !important;
         font-weight: 500;
@@ -120,9 +141,23 @@
         text-decoration: none !important;
         border: none !important;
         opacity: 0.85;
+        padding: 0.35rem 0.5rem;
+        border-radius: 2px;
+        transition: transform var(--mech-dur) var(--mech-ease),
+          box-shadow var(--mech-dur) var(--mech-ease), color 0.15s ease,
+          opacity 0.15s ease;
+        box-shadow: 0 var(--mech-depth) 0 transparent;
+        -webkit-tap-highlight-color: transparent;
       }
 
       .nav-center a:hover {
+        color: var(--forest) !important;
+        opacity: 1;
+      }
+
+      .nav-center a:active {
+        transform: translateY(2px);
+        box-shadow: 0 1px 0 rgba(58, 58, 56, 0.25);
         color: var(--forest) !important;
         opacity: 1;
       }
@@ -141,15 +176,25 @@
         text-transform: uppercase;
         padding: 0.5rem 0.9rem;
         border: 1px solid var(--hairline-border) !important;
-        background: transparent;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(247, 247, 245, 0.2) 100%);
         color: var(--ink) !important;
         cursor: pointer;
         border-radius: 2px;
+        box-shadow: 0 var(--mech-depth) 0 rgba(58, 58, 56, 0.22);
+        transition: transform var(--mech-dur) var(--mech-ease),
+          box-shadow var(--mech-dur) var(--mech-ease),
+          border-color 0.15s ease, color 0.15s ease;
+        -webkit-tap-highlight-color: transparent;
       }
 
       .btn-ghost:hover {
         border-color: var(--forest) !important;
         color: var(--forest) !important;
+      }
+
+      .btn-ghost:active {
+        transform: translateY(var(--mech-depth));
+        box-shadow: 0 0 0 rgba(58, 58, 56, 0.22);
       }
 
       .btn-forest {
@@ -159,14 +204,25 @@
         text-transform: uppercase;
         padding: 0.5rem 1rem;
         border: none;
-        background: var(--forest) !important;
+        background: linear-gradient(180deg, #234d3a 0%, var(--forest) 40%, #152e22 100%) !important;
         color: #fff !important;
         cursor: pointer;
         border-radius: 2px;
+        box-shadow: 0 var(--mech-depth) 0 rgba(8, 22, 16, 0.95);
+        transition: transform var(--mech-dur) var(--mech-ease),
+          box-shadow var(--mech-dur) var(--mech-ease),
+          filter 0.15s ease;
+        -webkit-tap-highlight-color: transparent;
       }
 
       .btn-forest:hover {
-        background: var(--forest-hover) !important;
+        filter: brightness(1.05);
+      }
+
+      .btn-forest:active {
+        transform: translateY(var(--mech-depth));
+        box-shadow: 0 0 0 rgba(8, 22, 16, 0.95);
+        filter: brightness(0.96);
       }
 
       /* --- Section dividers --- */
@@ -345,6 +401,15 @@
         background: var(--paper);
         padding: 32px;
         min-height: 200px;
+        box-shadow: 0 var(--mech-depth) 0 rgba(58, 58, 56, 0.12);
+        transition: transform var(--mech-dur) var(--mech-ease),
+          box-shadow var(--mech-dur) var(--mech-ease);
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .bento-cell:active {
+        transform: translateY(2px);
+        box-shadow: 0 0 0 rgba(58, 58, 56, 0.12);
       }
 
       .bento-cell h3 {
@@ -473,6 +538,21 @@
         border: 1px solid var(--hairline-border);
         background: #fff !important;
         border-radius: 2px;
+        box-shadow: inset 0 2px 0 rgba(0, 0, 0, 0.04);
+        transition: border-color 0.12s ease, box-shadow 0.12s ease;
+      }
+
+      .field input:focus,
+      .field textarea:focus {
+        outline: none;
+        border-color: var(--forest);
+        box-shadow: inset 0 2px 0 rgba(26, 60, 43, 0.12),
+          0 0 0 1px rgba(26, 60, 43, 0.2);
+      }
+
+      .field input:active,
+      .field textarea:active {
+        box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.08);
       }
 
       .field textarea {
@@ -599,12 +679,22 @@
           <div class="bento-grid">
             <article class="bento-cell bento-cell--coral">
               <h3>Recent notes</h3>
-              <p class="lead">技术笔记与随笔：占位条目，可链到 posts。</p>
+              <p class="lead">
+                <a href="blog.html" style="color: inherit; border-bottom: 1px solid rgba(232, 93, 76, 0.4)"
+                  >笔记列表</a
+                >
+                ·
+                <a
+                  href="posts/cursor-legal-research-harness-20260330.html"
+                  style="color: var(--coral); border-bottom-color: rgba(232, 93, 76, 0.5)"
+                  >Cursor 与法律研究</a
+                >
+              </p>
               <div class="mockup">
-                <span class="chip">draft</span>
-                <span class="chip">markdown</span><br />
-                ERR: connection reset — retrying fetch('/api/...')<br />
-                <span style="color: var(--coral)">→ see blog.html</span>
+                <span class="chip">2026-03-30</span>
+                <span class="chip">harness</span><br />
+                上下文 · 幻觉 · trade-off<br />
+                <span style="color: var(--coral)">→ posts/cursor-legal-research-harness-20260330.html</span>
               </div>
             </article>
             <article class="bento-cell bento-cell--mint">
